@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fact>
+    <symptoms>
+        <symptom value="nausea">false</symptom>
+        <symptom value="headache">true</symptom>
+        <symptom value="shivers">true</symptom>
+        <symptom value="headache">true</symptom>
+        <symptom value="joint pain">false</symptom>
+        <symptom value="runny nose">true</symptom>
+        <symptom value="sore throat">true</symptom>
+        <symptom value="cough">true</symptom>
+        <symptom value="fever">true</symptom>
+    </symptoms>
+</fact>

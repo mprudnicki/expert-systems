@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rules>
+    <rule><!--przeziębienie-->
+        <outcome value="cold" certainty="0.91"/>
+        <conditions>
+            <condition id="runny nose">true</condition>
+            <condition id="sore throat">true</condition>
+            <condition id="cough">true</condition>
+            <condition id="fever">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--grypa-->
+        <outcome value="flu" certainty="0.94"/>
+        <conditions>
+            <condition id="cold">true</condition>
+            <condition id="shivers">true</condition>
+            <condition id="headache">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--zapalenie płuc-->
+        <outcome value="pneumonia" certainty="0.84"/>
+        <conditions>
+            <condition id="fever">true</condition>
+            <condition id="cough">true</condition>
+            <condition id="shivers">true</condition>
+            <condition id="shallow breathing">true</condition>
+            <condition id="nausea">true</condition>
+            <condition id="sweating">true</condition>
+            <condition id="shivers">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--zapalenie gardła-->
+        <outcome value="pharyngitis" certainty="0.87"/>
+        <conditions>
+            <condition id="sneezing">true</condition>
+            <condition id="runny nose">true</condition>
+            <condition id="headache">true</condition>
+            <condition id="cough">true</condition>
+            <condition id="fatigue">true</condition>
+            <condition id="fever">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--odra-->
+        <outcome value="measles" certainty="0.88"/>
+        <conditions>
+            <condition id="fever">true</condition>
+            <condition id="runny nose">true</condition>
+            <condition id="sore throat">true</condition>
+            <condition id="cough">true</condition>
+            <condition id="inflamed eyes">true</condition>
+            <condition id="skin rash">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--świnka-->
+        <outcome value="mumps" certainty="0.74"/>
+        <conditions>
+            <condition id="flu">true</condition>
+            <condition id="discomfort in the salivary glands">true</condition>
+            <condition id="difficulty chewing">true</condition>
+            <condition id="pain of the testicles">true</condition>
+            <condition id="headache">true</condition>
+            <condition id="muscle aches">true</condition>
+            <condition id="tiredness">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--ospa-->
+        <outcome value="smallpox" certainty="0.85"/>
+        <conditions>
+            <condition id="malaise">true</condition>
+            <condition id="skin rash">true</condition>
+            <condition id="headache">true</condition>
+            <condition id="backache">true</condition>
+            <condition id="abdominal pain">true</condition>
+            <condition id="vomiting">true</condition>
+            <condition id="diarrhoea">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--ospa wietrzna-->
+        <outcome value="chickenpox" certainty="0.85"/>
+        <conditions>
+            <condition id="fever">true</condition>
+            <condition id="poor appetite">true</condition>
+            <condition id="headache">true</condition>
+            <condition id="malaise">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--wirus dengi-->
+        <outcome value="dengue fever" certainty="0.85"/>
+        <conditions>
+            <condition id="fever">true</condition>
+            <condition id="flu">true</condition>
+            <condition id="cold">true</condition>
+            <condition id="nausea">true</condition>
+            <condition id="fatigue">true</condition>
+            <condition id="vomiting">true</condition>
+        </conditions>
+    </rule>
+    <rule> <!--zapalenie spojówek-->
+        <outcome value="conjunctivitis" certainty="0.85"/>
+        <conditions>
+            <condition id="swollen eyelids">true</condition>
+            <condition id="eye itching">true</condition>
+            <condition id="eye burning">true</condition>
+            <condition id="eye pink discoloration">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--różyczka-->
+        <outcome value="rubella" certainty="0.61"/>
+        <conditions>
+            <condition id="fever">true</condition>
+            <condition id="skin rash">true</condition>
+            <condition id="swollen lymph nodes">true</condition>
+            <condition id="headache">true</condition>
+            <condition id="muscle pain">true</condition>
+            <condition id="inflamed eyes">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--tężec-->
+        <outcome value="tetanus" certainty="0.55"/>
+        <conditions>
+            <condition id="jaw cramping">true</condition>
+            <condition id="muscle spasms">true</condition>
+            <condition id="muscle stiffness">true</condition>
+            <condition id="trouble swallowing">true</condition>
+            <condition id="seizures">true</condition>
+            <condition id="headache">true</condition>
+            <condition id="cold">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--wścieklizna-->
+        <outcome value="rabies" certainty="0.55"/>
+        <conditions>
+            <condition id="aggressiveness">true</condition>
+            <condition id="confusion">true</condition>
+            <condition id="muscle spasms">true</condition>
+            <condition id="seizures">true</condition>
+            <condition id="weakness">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--dur brzuszny-->
+        <outcome value="typhoid" certainty="0.55"/>
+        <conditions>
+            <condition id="poor appetite">true</condition>
+            <condition id="abdominal pain">true</condition>
+            <condition id="headache">true</condition>
+            <condition id="weakness">true</condition>
+            <condition id="fever">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--wąglik-->
+        <outcome value="anthrax" certainty="0.75"/>
+        <conditions>
+            <condition id="flu">true</condition>
+            <condition id="nausea">true</condition>
+            <condition id="headache">true</condition>
+            <condition id="blood cough">true</condition>
+            <condition id="trouble swallowing">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--zapalenie wątroby typu A-->
+        <outcome value="hepatitis A" certainty="0.2"/>
+        <conditions>
+            <condition id="fatigue">true</condition>
+            <condition id="nausea">true</condition>
+            <condition id="vomiting">true</condition>
+            <condition id="abdominal pain">true</condition>
+            <condition id="dark urine">true</condition>
+            <condition id="joint pain">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--zapalenie wątroby typu B-->
+        <outcome value="hepatitis B" certainty="0.2"/>
+        <conditions>
+            <condition id="jaundice">true</condition>
+            <condition id="light-colored poop">true</condition>
+            <condition id="fever">true</condition>
+            <condition id="fatigue">true</condition>
+            <condition id="abdominal pain">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--zapalenie wątroby typu C-->
+        <outcome value="hepatitis C" certainty="0.2"/>
+        <conditions>
+            <condition id="sore muscles">true</condition>
+            <condition id="joint pain">true</condition>
+            <condition id="fever">true</condition>
+            <condition id="abdominal pain">true</condition>
+            <condition id="nausea">true</condition>
+            <condition id="dark urine">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--zapalenie wątroby typu D-->
+        <outcome value="hepatitis D" certainty="0.2"/>
+        <conditions>
+            <condition id="jaundice">true</condition>
+            <condition id="joint pain">true</condition>
+            <condition id="vomiting">true</condition>
+            <condition id="abdominal pain">true</condition>
+            <condition id="fatigue">true</condition>
+            <condition id="dark urine">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--zapalenie wątroby typu E-->
+        <outcome value="hepatitis E" certainty="0.2"/>
+        <conditions>
+            <condition id="sore muscles">true</condition>
+            <condition id="joint pain">true</condition>
+            <condition id="fever">true</condition>
+            <condition id="abdominal pain">true</condition>
+            <condition id="nausea">true</condition>
+            <condition id="dark urine">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--żółtaczka-->
+        <outcome value="jaundice" certainty="0.54"/>
+        <conditions>
+            <condition id="fatigue">true</condition>
+            <condition id="abdominal pain">true</condition>
+            <condition id="weight loss">true</condition>
+            <condition id="vomiting">true</condition>
+            <condition id="fever">true</condition>
+            <condition id="pale stools">true</condition>
+            <condition id="dark urine">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--tularemia-->
+        <outcome value="tularemia" certainty="0.51"/>
+        <conditions>
+            <condition id="swollen lymph nodes">true</condition>
+            <condition id="fever">true</condition>
+            <condition id="chills">true</condition>
+            <condition id="fatigue">true</condition>
+            <condition id="headache">true</condition>
+            <condition id="skin ulcer">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--toksoplazmoza-->
+        <outcome value="toxoplasmosis" certainty="0.83"/>
+        <conditions>
+            <condition id="fever">true</condition>
+            <condition id="swollen lymph nodes">true</condition>
+            <condition id="headache">true</condition>
+            <condition id="muscle aches">true</condition>
+            <condition id="sore throat">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--bruceloza-->
+        <outcome value="brucellosis" certainty="0.83"/>
+        <conditions>
+            <condition id="back pain">true</condition>
+            <condition id="body-wide aches">true</condition>
+            <condition id="poor appetite">true</condition>
+            <condition id="weight loss">true</condition>
+            <condition id="headache">true</condition>
+            <condition id="weakness">true</condition>
+            <condition id="abdominal pain">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--bąblowica-->
+        <outcome value="echinococcosis" certainty="0.21"/>
+        <conditions>
+            <condition id="liver cyst pain">true</condition>
+            <condition id="bloody sputum">true</condition>
+            <condition id="chest pain">true</condition>
+            <condition id="cough">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--cholera-->
+        <outcome value="cholera" certainty="0.31"/>
+        <conditions>
+            <condition id="diarrhea">true</condition>
+            <condition id="vomiting">true</condition>
+            <condition id="rapid heart rate">true</condition>
+            <condition id="dry mouth">true</condition>
+            <condition id="low blood pressure">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--Zatrucie jadem kiełbasianym-->
+        <outcome value="botulizm" certainty="0.46"/>
+        <conditions>
+            <condition id="trouble swallowing">true</condition>
+            <condition id="dry mouth">true</condition>
+            <condition id="facial weakness">true</condition>
+            <condition id="double vision">true</condition>
+            <condition id="shallow breathing">true</condition>
+            <condition id="nausea">true</condition>
+            <condition id="paralysis">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--czerwonka bakteryjna-->
+        <outcome value="bacterial dysentery" certainty="0.45"/>
+        <conditions>
+            <condition id="diarrhea">true</condition>
+            <condition id="poor appetite">true</condition>
+            <condition id="rectal pain">true</condition>
+            <condition id="abdominal pain">true</condition>
+            <condition id="fever">true</condition>
+            <condition id="chills">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--Gorączka Zachodniego Nilu-->
+        <outcome value="bacterial dysentery" certainty="0.18"/>
+        <conditions>
+            <condition id="fever">true</condition>
+            <condition id="headache">true</condition>
+            <condition id="body aches">true</condition>
+            <condition id="skin rash">true</condition>
+            <condition id="swollen lymph nodes">true</condition>
+            <condition id="paralysis">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--jersinioza-->
+        <outcome value="yersinia" certainty="0.26"/>
+        <conditions>
+            <condition id="diarrhea">true</condition>
+            <condition id="fever">true</condition>
+            <condition id="abdominal pain">true</condition>
+            <condition id="vomiting">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--krztusiec-->
+        <outcome value="whooping cough" certainty="0.26"/>
+        <conditions>
+            <condition id="cough">true</condition>
+            <condition id="sneezing">true</condition>
+            <condition id="runny nose">true</condition>
+            <condition id="fever">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--Choroba Creutzfeldta-Jacoba-->
+        <outcome value="Creutzfeldt-Jakob disease" certainty="0.15"/>
+        <conditions>
+            <condition id="personality changes">true</condition>
+            <condition id="anxiety">true</condition>
+            <condition id="depression">true</condition>
+            <condition id="memory loss">true</condition>
+            <condition id="impaired thinking">true</condition>
+            <condition id="blindness">true</condition>
+            <condition id="insomnia">true</condition>
+        </conditions>
+    </rule>
+    <rule><!--Chikungunya-->
+        <outcome value="Chikungunya" certainty="0.1"/>
+        <conditions>
+            <condition id="fever">true</condition>
+            <condition id="joint pain">true</condition>
+            <condition id="headache">true</condition>
+            <condition id="muscle pain">true</condition>
+            <condition id="joint swelling">true</condition>
+            <condition id="skin rash">true</condition>
+        </conditions>
+    </rule>
+</rules>
