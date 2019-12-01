@@ -32,6 +32,10 @@ public class Rule {
         return certainty;
     }
 
+    public Double getAbsoluteCertainty() {
+        return Math.abs(certainty);
+    }
+
     public void setCertainty(Double certainty) {
         this.certainty = certainty;
     }
@@ -50,16 +54,39 @@ public class Rule {
 
     // first check if all available conditions from rule are matching facts
     public boolean isRuleTrueForFacts(Map<String, Boolean> symptomList) {
-//        List<String> filteredConditions = conditions.keySet().stream().filter(e -> !parentRules.stream().map(Rule::getOutcome).collect(Collectors.toList()).contains(e)).collect(Collectors.toList());
       List<String> filteredConditions = conditions.keySet().stream().filter(condition -> !parentRules.stream().anyMatch(rule -> rule.symptomEqualsAnyTreeOutcome(condition))).collect(Collectors.toList());
         if(isCalculated) return calculationValue;
         for(String condition : filteredConditions) {
             if(conditions.get(condition) != symptomList.get(condition)) return false;
-    }
-    calculationValue = parentRules.stream().allMatch(e -> e.isRuleTrueForFacts(symptomList));
-    isCalculated = true;
+        }
+        calculationValue = parentRules.stream().allMatch(e -> e.isRuleTrueForFacts(symptomList));
+        isCalculated = true;
         return calculationValue;
-}
+    }
+
+    private double calculateCertainty() {
+        if(parentRules.isEmpty()) return certainty;
+        else if(parentRules.size() == 1) return parentRules.get(0).calculateCertainty() * certainty;
+        else {
+            double sum = certainty * parentRules.stream()
+                    .mapToDouble(Rule::calculateCertainty)
+                    .sum();
+            double multiplication = parentRules.stream()
+                    .mapToDouble(Rule::calculateCertainty)
+                    .reduce(1, (a, b) -> a * b);
+            if(parentRules.stream().filter(e -> e.getCertainty() >= 0).count() > 0) {
+                return sum - multiplication;
+            } else if(parentRules.stream().filter(e -> e.getCertainty() < 0).count() > 0) {
+                return sum + multiplication;
+            } else {
+                return sum / (1 - parentRules.stream()
+                        .sorted(Comparator.comparingDouble(Rule::getAbsoluteCertainty).reversed())
+                        .findFirst()
+                        .orElseGet(null)
+                        .getCertainty());
+            }
+        }
+    }
 
     private boolean symptomEqualsAnyTreeOutcome(String symptom) {
         return outcome.equals(symptom) || parentRules.stream().anyMatch(e -> e.symptomEqualsAnyTreeOutcome(symptom));
@@ -75,7 +102,7 @@ public class Rule {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("(").append(certainty).append(")");
+        stringBuilder.append("(").append(Math.round(calculateCertainty() * 100.0) / 100.0).append(")");
         stringBuilder.append("[").append(outcome).append("]");
         stringBuilder.append(" <- ");
         conditions.entrySet().stream().map(e -> "{" + String.valueOf(e.getKey()) + "=" + String.valueOf(e.getValue()) + "}").forEach(stringBuilder::append);

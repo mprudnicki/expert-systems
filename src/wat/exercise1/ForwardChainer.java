@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 
 class ForwardChainer {
     static List<Rule> execute(Map<String, Boolean> symptomList, List<Rule> ruleList) {
-        return ruleList.stream().filter(rule -> rule.isRuleTrueForFacts(symptomList)).collect(Collectors.toList());
+        return ruleList.stream()
+                .filter(rule -> rule.isRuleTrueForFacts(symptomList))
+                .collect(Collectors.toList());
     }
 }

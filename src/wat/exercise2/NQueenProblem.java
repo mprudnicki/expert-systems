@@ -1,5 +1,6 @@
 package wat.exercise2;
 
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -8,12 +9,10 @@ import java.util.stream.Collectors;
 
 public class NQueenProblem {
 
-    private final Position[] positions;
     private final int[][] result;
     private final int size;
     public NQueenProblem(int n) {
         size = n;
-        positions = new Position[size];
         result = new int[size][size];
     }
 
@@ -28,7 +27,18 @@ public class NQueenProblem {
         public String toString() {
             return "P<" + row + ", " + col + ">";
         }
+
+        int calculateScore() {
+            int diagonalUpLeft, diagonalDownRight, diagonalDownLeft, diagonalUpRight;
+            diagonalUpLeft = Math.min(row, col);
+            diagonalDownRight = Math.min(size - row - 1, size - col);
+            diagonalDownLeft = Math.min(size - row, col - 1);
+            diagonalUpRight = Math.min(row, size - col);
+            return diagonalUpLeft + diagonalDownRight + diagonalDownLeft + diagonalUpRight;
+        }
     }
+
+
 
     private static void prettyPrint(int[][] result) {
         System.out.println(Arrays.stream(result).map(Arrays::toString).collect(Collectors.joining("\n")) + "\n");
@@ -46,73 +56,70 @@ public class NQueenProblem {
     private boolean getSolution(int n, int row) {
         if (n <= 3) return false;
         else if (row == n) return true;
-
         final List<Position> localPositions = new LinkedList<>();
-
         for (int col = 0; col < n; col++) {
-            boolean isSafe = true;
-            for (int placedQueen = 0; placedQueen < row; placedQueen++) {
-                if (isQueenNotSafe(placedQueen, col, row)) {
-                    isSafe = false;
-                }
-            }
-
-            if (isSafe) {
+            if(isQueenSafe(row, col)) {
                 localPositions.add(new Position(row, col));
             }
         }
 
         if(localPositions.isEmpty()) return false;
-
-        for (int col = 0; col < n; col++) {
-            boolean isSafe = true;
-            positions[row] = new Position(row, col);
-
-            for (int placedQueen = 0; placedQueen < row; placedQueen++) {
-                if (isQueenNotSafe(placedQueen, col, row)) {
-                    isSafe = false;
-                }
-            }
-
-            if (isSafe) {
-                Position localBestSolution = pickBestPositionMaxLeft(localPositions);
-                result[localBestSolution.row][localBestSolution.col] = 1;
-                if (getSolution(n, row + 1)) return true;
-                result[localBestSolution.row][localBestSolution.col] = 0;
-            }
+        localPositions.sort(Comparator.comparingDouble(Position::calculateScore).reversed());
+        for(Position position : localPositions) {
+            result[position.row][position.col] = 1;
+            if (getSolution(n, row + 1)) return true;
+            result[position.row][position.col] = 0;
         }
         return false;
     }
 
-    private Position pickBestPositionMaxLeft(List<Position> positions) {
-        final Comparator<Position> positionComparator = Comparator.comparingInt(position -> position.row);
-        positions.sort(positionComparator);
-        if(positions.isEmpty()) return null;
-        else return positions.get(0);
+    private boolean isQueenSafe(int row, int col) {
+        return isQueenSafeRowAndColumn(row, col) && isQueenSafeDiagonal(row, col) && isQueenSafeAntidiagonal(row, col);
+    }
+    private boolean isQueenSafeRowAndColumn(int row, int col) {
+        for(int i = 0; i < size; i++) {
+            if(result[i][col] == 1 || result[row][i] == 1) return false;
+        }
+        return true;
     }
 
-    private boolean isQueenNotSafe(int placedQueen, int col, int row) {
-        return checkColumn(placedQueen, col)
-                || checkDiagonal(placedQueen, col, row)
-                || checkAntidiagonal(placedQueen, col, row);
+    private boolean isQueenSafeDiagonal(int row, int col) {
+        int rowStart = row;
+        int colStart = col;
+        while(rowStart > 0 && colStart > 0) {
+            rowStart--;
+            colStart--;
+        }
+        while(rowStart < size && colStart < size) {
+            if(result[rowStart][colStart] == 1) return false;
+            rowStart++;
+            colStart++;
+        }
+        return true;
     }
 
-    private boolean checkColumn(int placedQueen, int col) {
-        return positions[placedQueen].col == col;
-    }
-
-    private boolean checkDiagonal(int placedQueen, int col, int row) {
-        return positions[placedQueen].row - positions[placedQueen].col == row - col;
-    }
-
-    private boolean checkAntidiagonal(int placedQueen, int col, int row) {
-        return positions[placedQueen].row + positions[placedQueen].col == row + col;
+    private boolean isQueenSafeAntidiagonal(int row, int col) {
+        int rowStart = row;
+        int colStart = col;
+        while(rowStart > 0 && colStart < size - 1) {
+            rowStart--;
+            colStart++;
+        }
+        while(rowStart < size && colStart > 0) {
+            if(result[rowStart][colStart] == 1) return false;
+            rowStart++;
+            colStart--;
+        }
+        return true;
     }
 
     public static void main(String[] args) {
-        Integer input = 5;
+        Integer input = 35;
         NQueenProblem nQueenProblem = new NQueenProblem(input);
+        System.out.println(String.format("Finding solution for a %sx%s chessboard...", input, input));
+        long startTime = System.nanoTime();
         nQueenProblem.solve();
+        System.out.println(String.format("Estimated time: %s", ((double) System.nanoTime() - startTime) / 1_000_000.0));
     }
 
 }
